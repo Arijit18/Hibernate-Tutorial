@@ -1,26 +1,49 @@
 package org.tutorial.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
+@Table (name = "Employee_Details")
 public class Employee {
 	
 	@Id
-	int employeeID;
-	String firstName;
-	String lastName;
-	int salary;
+	private int employeeID;
+	@Column (name = "FirstName")
+	private String firstName;
+	@Column (name = "Last_Name")
+	private String lastName;
+	@Column (name = "Date_Of_Joining")
+	@Temporal (TemporalType.DATE)
+	private Date doj;
+	
+	public Date getDoj() {
+		return doj;
+	}
+
+	public void setDoj(Date doj) {
+		this.doj = doj;
+	}
+
+	@Column (name = "Salary")
+	private int salary;
 	
 	public Employee() {
 		
 	}
 
-	public Employee(int employeeID, String firstName, String lastName, int salary) {
+	public Employee(int employeeID, String firstName, String lastName, Date doj, int salary) {
 		
 		this.employeeID = employeeID;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.doj=doj;
 		this.salary = salary;
 	}
 

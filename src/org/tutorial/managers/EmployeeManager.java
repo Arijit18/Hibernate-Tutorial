@@ -1,5 +1,6 @@
 package org.tutorial.managers;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,14 +35,14 @@ public class EmployeeManager {
 	 * Method to create an employee record in the database
 	 * 
 	 */
-	public void addEmployee(int employeeId, String firstName, String lastName, int salary){
+	public void addEmployee(int employeeId, String firstName, String lastName, Date doj, int salary){
 		Session session = sessionFactory.openSession();
 		Transaction transaction =  null;
 		
 		try{
 			
 			transaction = session.beginTransaction();
-			Employee emp = new Employee(employeeId, firstName, lastName, salary);
+			Employee emp = new Employee(employeeId, firstName, lastName, doj,salary);
 			session.save(emp);
 			transaction.commit();
 			
@@ -77,7 +78,7 @@ public class EmployeeManager {
 			while(iterator.hasNext()){
 				Employee employee = (Employee) iterator.next();
 				
-				System.out.printf("%-15d%-10s%-10s%-10d\n", employee.getEmployeeID(),employee.getFirstName(),employee.getLastName(),employee.getSalary());
+				System.out.printf("%-15d%-10s%-10s%-10s%-10d\n", employee.getEmployeeID(),employee.getFirstName(),employee.getLastName(),employee.getDoj(),employee.getSalary());
 				/*System.out.println("Employee ID: "+employee.getEmployeeID());
 				System.out.println("First Name: "+employee.getFirstName());
 				System.out.println("Last Name: "+employee.getLastName());
