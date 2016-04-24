@@ -1,5 +1,6 @@
 package org.tutorial.managers;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -89,7 +90,7 @@ public class EmployeeManager {
 				System.out.println("Last Name: "+employee.getLastName());
 				System.out.println("Salary: "+employee.getSalary());*/
 				
-				Set<Certificate> certificates = employee.getCertificates();
+				Collection<Certificate> certificates = employee.getCertificates();
 				for(Iterator<Certificate> iter = certificates.iterator();
 						iter.hasNext();){
 					Certificate cert = (Certificate) iter.next();

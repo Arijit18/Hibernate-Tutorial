@@ -1,5 +1,6 @@
 package org.tutorial.entity;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,9 +11,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 
 @Entity
@@ -30,14 +37,17 @@ public class Employee {
 	private Date doj;
 	@Column (name = "Certificates")
 	@ElementCollection
-	private Set<Certificate> certificates = new HashSet<Certificate>();
+	@JoinTable(name = "Employee_Qualifications",
+				joinColumns=@JoinColumn(name="employeeID"))
+	@GenericGenerator(name="hilo-gen", strategy = "sequence")
+	@CollectionId(columns = { @Column(name = "CertificateID") }, generator = "hilo-gen", type = @Type(type = "long")) 
+	private Collection<Certificate> certificates = new HashSet<Certificate>();
 	@Column (name = "Salary")
 	private int salary;
 	
-	public Employee() {
+	public Employee(){
 		
 	}
-
 	public Employee(String firstName, String lastName, Date doj, int salary) {
 		
 		this.firstName = firstName;
@@ -87,12 +97,12 @@ public class Employee {
 		this.doj = doj;
 	}
 
-	public Set<Certificate> getCertificates() {
+	public Collection<Certificate> getCertificates() {
 		return certificates;
 	}
-
-	public void setCertificates(Set<Certificate> certificates) {
+	public void setCertificates(Collection<Certificate> certificates) {
 		this.certificates = certificates;
 	}
+
 	
 }
