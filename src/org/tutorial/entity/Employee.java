@@ -1,19 +1,25 @@
 package org.tutorial.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 @Entity
 @Table (name = "Employee_Details")
 public class Employee {
 	
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int employeeID;
 	@Column (name = "FirstName")
 	private String firstName;
@@ -22,15 +28,9 @@ public class Employee {
 	@Column (name = "Date_Of_Joining")
 	@Temporal (TemporalType.DATE)
 	private Date doj;
-	
-	public Date getDoj() {
-		return doj;
-	}
-
-	public void setDoj(Date doj) {
-		this.doj = doj;
-	}
-
+	@Column (name = "Certificates")
+	@ElementCollection
+	private Set<Certificate> certificates = new HashSet<Certificate>();
 	@Column (name = "Salary")
 	private int salary;
 	
@@ -38,14 +38,14 @@ public class Employee {
 		
 	}
 
-	public Employee(int employeeID, String firstName, String lastName, Date doj, int salary) {
+	public Employee(String firstName, String lastName, Date doj, int salary) {
 		
-		this.employeeID = employeeID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.doj=doj;
 		this.salary = salary;
 	}
+	
 
 	public int getEmployeeID() {
 		return employeeID;
@@ -77,6 +77,22 @@ public class Employee {
 
 	public void setSalary(int salary) {
 		this.salary = salary;
+	}
+	
+	public Date getDoj() {
+		return doj;
+	}
+
+	public void setDoj(Date doj) {
+		this.doj = doj;
+	}
+
+	public Set<Certificate> getCertificates() {
+		return certificates;
+	}
+
+	public void setCertificates(Set<Certificate> certificates) {
+		this.certificates = certificates;
 	}
 	
 }

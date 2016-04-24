@@ -3,12 +3,14 @@ package org.tutorial.managers;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.tutorial.entity.Certificate;
 import org.tutorial.entity.Employee;
 
 public class EmployeeManager {
@@ -20,7 +22,7 @@ public class EmployeeManager {
 			sessionFactory = new Configuration().configure().buildSessionFactory();
 			System.err.println("Session factory successfully created.");
 		}catch (Throwable ex){
-			System.err.println("Cannot create session factory. +ex");
+			System.err.println("Cannot create session factory." +ex);
 		}
 	}
 	/**@author Arijit
@@ -35,15 +37,16 @@ public class EmployeeManager {
 	 * Method to create an employee record in the database
 	 * 
 	 */
-	public void addEmployee(int employeeId, String firstName, String lastName, Date doj, int salary){
+	public Integer addEmployee(String firstName, String lastName, Date doj, int salary, Set<Certificate> certificates){
 		Session session = sessionFactory.openSession();
 		Transaction transaction =  null;
-		
+		Integer employeeID = null;
 		try{
 			
 			transaction = session.beginTransaction();
-			Employee emp = new Employee(employeeId, firstName, lastName, doj,salary);
-			session.save(emp);
+			Employee emp = new Employee(firstName, lastName, doj,salary);
+			emp.setCertificates(certificates);
+			employeeID = (Integer) session.save(emp);
 			transaction.commit();
 			
 		}catch(HibernateException hex){
@@ -56,6 +59,8 @@ public class EmployeeManager {
 		finally{
 			session.close();
 		}
+		return employeeID;
+
 	}
 	
 	/**@author Arijit
@@ -83,6 +88,13 @@ public class EmployeeManager {
 				System.out.println("First Name: "+employee.getFirstName());
 				System.out.println("Last Name: "+employee.getLastName());
 				System.out.println("Salary: "+employee.getSalary());*/
+				
+				Set<Certificate> certificates = employee.getCertificates();
+				for(Iterator<Certificate> iter = certificates.iterator();
+						iter.hasNext();){
+					Certificate cert = (Certificate) iter.next();
+					System.out.println("\n"+cert.getCertificateName());
+				}
 			}
 			System.out.println("\n--------------------------------------------------------------------------------------");
 			
@@ -106,7 +118,7 @@ public class EmployeeManager {
 	/*
 	 * Method to update salary for an employee at a time
 	 */
-	public void updateEmployee(int employeeID, int salary){
+	public void updateEmployee(Integer employeeID, int salary){
 		Session session = sessionFactory.openSession();
 		Transaction transaction =  null;
 		
@@ -134,7 +146,7 @@ public class EmployeeManager {
 	/*
 	 * Method to delete an employee record from the database
 	 */
-	public void deleteEmployee(int employeeID){
+	public void deleteEmployee(Integer employeeID){
 		Session session = sessionFactory.openSession();
 		Transaction transaction =  null;
 		
