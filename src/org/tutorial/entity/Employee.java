@@ -50,7 +50,7 @@ public class Employee {
 	private Collection<Certificate> certificates = new ArrayList<Certificate>();
 	
 	@OneToOne
-	@Column (name = "Vehicle")
+	/*@Column (name = "Vehicle")*/
 	private Vehicle vehicles;
 	@Column (name = "Salary")
 	private int salary;

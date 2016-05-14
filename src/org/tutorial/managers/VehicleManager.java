@@ -48,7 +48,7 @@ public class VehicleManager {
 	/**@author Arijit
 	 * 
 	 */
-	public void viewCertificates(){
+	public void viewVehicles(){
 			
 		Session session = SessionFactoryManager.sessionFactory.openSession();
 		

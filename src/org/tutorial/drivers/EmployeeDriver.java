@@ -5,7 +5,11 @@ import java.util.HashSet;
 
 import org.tutorial.entity.Certificate;
 import org.tutorial.entity.Vehicle;
+import org.tutorial.managers.CertificatesManager;
 import org.tutorial.managers.EmployeeManager;
+import org.tutorial.managers.VehicleManager;
+
+import utilities.SessionFactoryManager;
 
 /**@author Arijit
  *
@@ -16,7 +20,7 @@ public class EmployeeDriver {
 
 	public static void main(String[] args) {
 		
-		
+		/*
 		
 		HashSet<Certificate> set1 =  new HashSet<Certificate>();
 		
@@ -52,7 +56,58 @@ public class EmployeeDriver {
 		empManager.updateEmployee(empID2, 15000);
 		empManager.listEmployees();
 		//empManager.deleteEmployee(empID1);
-		empManager.listEmployees();
+		empManager.listEmployees();*/
+		
+		SessionFactoryManager.buildSessionFactory();
+		
+		Vehicle v1 = new Vehicle();
+		Vehicle v2 = new Vehicle();
+		Vehicle v3 = new Vehicle();
+		
+		v1.setVehicleType("Four Wheeler");
+		v2.setVehicleType("Two Wheeler");
+		v3.setVehicleType("Four Wheeler");
+		
+		v1.setVehicleName("Ford Figo Aspire");
+		v2.setVehicleName("Royal Enfield");
+		v3.setVehicleName("Hyndai Elantra");
+		
+		Certificate c1 = new Certificate();
+		Certificate c2 = new Certificate();
+		Certificate c3 = new Certificate();
+		
+		c1.setCertificateName("Diploma");
+		c2.setCertificateName("B.Sc");
+		c3.setCertificateName("B.Tech");
+		
+		HashSet<Certificate> cert1 = new HashSet<>();
+		HashSet<Certificate> cert2 = new HashSet<>();
+		HashSet<Certificate> cert3 = new HashSet<>();
+		
+		cert1.add(c1);
+		cert2.add(c2);
+		cert2.add(c3);
+		
+		cert3.add(c2);
+		cert3.add(c3);
+		
+		EmployeeManager emp = new EmployeeManager();
+		
+		emp.addEmployee("Amit", "Das", new Date(), 50000, cert1, v2);
+		emp.addEmployee("Arijit", "Das", new Date(), 30000, cert2, v1);
+		emp.addEmployee("Mitrani", "Das", new Date(), 100000, cert3, v3);
+		
+		
+		emp.listEmployees();
+		
+		CertificatesManager certM = new CertificatesManager();
+		
+		certM.viewCertificates();
+		
+		VehicleManager vehiM = new VehicleManager();
+		
+		vehiM.viewVehicles();		
+		
 		
 	}
 

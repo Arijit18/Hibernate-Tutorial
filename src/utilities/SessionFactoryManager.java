@@ -7,7 +7,7 @@ public class SessionFactoryManager {
 
 	public static SessionFactory sessionFactory;
 	
-	public void buildSessionFactory(){
+	public static void buildSessionFactory(){
 		
 		try{
 			sessionFactory = new Configuration().configure().buildSessionFactory();

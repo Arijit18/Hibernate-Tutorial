@@ -12,7 +12,7 @@ public class Vehicle {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@Column (name = "ID")
 	private int vehicleID;
-	@Column (name = "Vehicle Type")
+	@Column (name = "VehicleType")
 	private String vehicleType;
 	@Column (name = "VehicleName")
 	private String vehicleName;
