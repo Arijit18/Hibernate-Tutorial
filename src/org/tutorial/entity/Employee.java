@@ -1,5 +1,6 @@
 package org.tutorial.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,15 +38,23 @@ public class Employee {
 	@Column (name = "Date_Of_Joining")
 	@Temporal (TemporalType.DATE)
 	private Date doj;
-	@Column (name = "Certificates")
+	/*@Column (name = "Certificates")
 	@ElementCollection
 	@JoinTable(name = "Employee_Qualifications",
 				joinColumns=@JoinColumn(name="employeeID"))
 	@GenericGenerator(name="hilo-gen", strategy = "sequence")
-	@CollectionId(columns = { @Column(name = "CertificateID") }, generator = "hilo-gen", type = @Type(type = "long")) 
-	private Collection<Certificate> certificates = new HashSet<Certificate>();
+	@CollectionId(columns = { @Column(name = "CertificateID") }, generator = "hilo-gen", type = @Type(type = "long"))*/ 
+	@OneToMany
+	@JoinTable(name = "Employee_Certificates", joinColumns=@JoinColumn(name = "EmployeeID"),
+						inverseJoinColumns=@JoinColumn(name = "CertificateID"))
+	private Collection<Certificate> certificates = new ArrayList<Certificate>();
+	
+	@OneToOne
+	@Column (name = "Vehicle")
+	private Vehicle vehicles;
 	@Column (name = "Salary")
 	private int salary;
+	
 	
 	public Employee(){
 		
@@ -103,6 +114,13 @@ public class Employee {
 	public void setCertificates(Collection<Certificate> certificates) {
 		this.certificates = certificates;
 	}
+	public Vehicle getVehicles() {
+		return vehicles;
+	}
+	public void setVehicles(Vehicle vehicles) {
+		this.vehicles = vehicles;
+	}
 
+	
 	
 }

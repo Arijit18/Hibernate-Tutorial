@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.tutorial.entity.Certificate;
 import org.tutorial.entity.Employee;
+import org.tutorial.entity.Vehicle;
 
 public class EmployeeManager {
 
@@ -38,7 +39,7 @@ public class EmployeeManager {
 	 * Method to create an employee record in the database
 	 * 
 	 */
-	public Integer addEmployee(String firstName, String lastName, Date doj, int salary, Set<Certificate> certificates){
+	public Integer addEmployee(String firstName, String lastName, Date doj, int salary, Set<Certificate> certificates,Vehicle vehicle){
 		Session session = sessionFactory.openSession();
 		Transaction transaction =  null;
 		Integer employeeID = null;
@@ -47,6 +48,7 @@ public class EmployeeManager {
 			transaction = session.beginTransaction();
 			Employee emp = new Employee(firstName, lastName, doj,salary);
 			emp.setCertificates(certificates);
+			emp.setVehicles(vehicle);
 			employeeID = (Integer) session.save(emp);
 			transaction.commit();
 			

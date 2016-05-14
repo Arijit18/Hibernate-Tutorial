@@ -25,5 +25,7 @@
 
         <!-- Names the associated entity class -->
         <mapping class='org.tutorial.entity.Employee'/>
+        <mapping class='org.tutorial.entity.Vehicle'/>
+        <mapping class='org.tutorial.entity.Certificate'/>
     </session-factory>
 </hibernate-configuration>
