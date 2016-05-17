@@ -60,26 +60,18 @@ public class EmployeeDriver {
 		
 		SessionFactoryManager.buildSessionFactory();
 		
-		Vehicle v1 = new Vehicle();
-		Vehicle v2 = new Vehicle();
-		Vehicle v3 = new Vehicle();
+		VehicleManager vm = new VehicleManager();
+		CertificatesManager cm = new CertificatesManager();
 		
-		v1.setVehicleType("Four Wheeler");
-		v2.setVehicleType("Two Wheeler");
-		v3.setVehicleType("Four Wheeler");
+		Vehicle v1 = vm.addVehicle("Four Wheeler", "Ford Figo Aspire");
+		Vehicle v2 = vm.addVehicle("Two Wheeler", "Royal Enfield");
+		Vehicle v3 = vm.addVehicle("Four Wheeler", "Hyndai Elantra");
+				
+		Certificate c1 = cm.addCertificates("Diploma");
+		Certificate c2 = cm.addCertificates("B.Sc");
+		Certificate c3 = cm.addCertificates("B.Tech");
 		
-		v1.setVehicleName("Ford Figo Aspire");
-		v2.setVehicleName("Royal Enfield");
-		v3.setVehicleName("Hyndai Elantra");
-		
-		Certificate c1 = new Certificate();
-		Certificate c2 = new Certificate();
-		Certificate c3 = new Certificate();
-		
-		c1.setCertificateName("Diploma");
-		c2.setCertificateName("B.Sc");
-		c3.setCertificateName("B.Tech");
-		
+			
 		HashSet<Certificate> cert1 = new HashSet<>();
 		HashSet<Certificate> cert2 = new HashSet<>();
 		HashSet<Certificate> cert3 = new HashSet<>();
@@ -100,14 +92,14 @@ public class EmployeeDriver {
 		
 		emp.listEmployees();
 		
-		CertificatesManager certM = new CertificatesManager();
+		/*CertificatesManager certM = new CertificatesManager();
 		
 		certM.viewCertificates();
 		
 		VehicleManager vehiM = new VehicleManager();
 		
 		vehiM.viewVehicles();		
-		
+		*/
 		
 	}
 

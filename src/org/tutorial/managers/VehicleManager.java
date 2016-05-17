@@ -17,7 +17,7 @@ public class VehicleManager {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void addVehicle(String type, String name){
+	public Vehicle addVehicle(String type, String name){
 		
 		Vehicle vehicle = new Vehicle();
 		vehicle.setVehicleType(type);
@@ -42,6 +42,8 @@ public class VehicleManager {
 			
 			hex.printStackTrace();
 		}
+		
+		return vehicle;
 		
 	}
 	

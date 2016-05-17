@@ -15,17 +15,13 @@ import org.tutorial.entity.Certificate;
 import org.tutorial.entity.Employee;
 import org.tutorial.entity.Vehicle;
 
+import utilities.SessionFactoryManager;
+
 public class EmployeeManager {
 
-	public static SessionFactory sessionFactory ;
-		
+			
 	public EmployeeManager(){
-		try{
-			sessionFactory = new Configuration().configure().buildSessionFactory();
-			System.err.println("Session factory successfully created.");
-		}catch (Throwable ex){
-			System.err.println("Cannot create session factory." +ex);
-		}
+		
 	}
 	/**@author Arijit
 	 * 
@@ -40,7 +36,7 @@ public class EmployeeManager {
 	 * 
 	 */
 	public Integer addEmployee(String firstName, String lastName, Date doj, int salary, Set<Certificate> certificates,Vehicle vehicle){
-		Session session = sessionFactory.openSession();
+		Session session = SessionFactoryManager.sessionFactory.openSession();
 		Transaction transaction =  null;
 		Integer employeeID = null;
 		try{
@@ -74,7 +70,7 @@ public class EmployeeManager {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void listEmployees(){
-		Session session = sessionFactory.openSession();
+		Session session = SessionFactoryManager.sessionFactory.openSession();
 		Transaction transaction =  null;
 		
 		try{
@@ -122,7 +118,7 @@ public class EmployeeManager {
 	 * Method to update salary for an employee at a time
 	 */
 	public void updateEmployee(Integer employeeID, int salary){
-		Session session = sessionFactory.openSession();
+		Session session = SessionFactoryManager.sessionFactory.openSession();
 		Transaction transaction =  null;
 		
 		try{
@@ -150,7 +146,7 @@ public class EmployeeManager {
 	 * Method to delete an employee record from the database
 	 */
 	public void deleteEmployee(Integer employeeID){
-		Session session = sessionFactory.openSession();
+		Session session = SessionFactoryManager.sessionFactory.openSession();
 		Transaction transaction =  null;
 		
 		try{

@@ -21,7 +21,7 @@ public class CertificatesManager {
 	 * 
 	 * @param name
 	 */
-	public void addCertificates(String name){
+	public Certificate addCertificates(String name){
 		Certificate cert = new Certificate();
 		cert.setCertificateName(name);
 		Integer certID;
@@ -44,6 +44,8 @@ public class CertificatesManager {
 			
 			hex.printStackTrace();
 		}
+		
+		return cert;
 	}
 	
 	/**@author Arijit
